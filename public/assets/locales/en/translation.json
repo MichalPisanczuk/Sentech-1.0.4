@@ -1,0 +1,18 @@
+{
+  "Catalogue": "Sentech ignition system catologue",
+  "Make": "Make",
+  "Model": "Model",
+  "Engine": "Engine",
+  "Year": "Year",
+  "Power": "Power HP (kW)",
+  "Wires": "Wires",
+  "Copper_Wires": "Copper wires",
+  "Coils": "Coils",
+  "Repair_Kit": "Repair kit",
+  "Bar": "Bar",
+  "Choice_Make": "Make",
+  "Choice_Model": "Model",
+  "Choice_Engine": "Engine",
+  "Make_Selection": "Select",
+  "Your_car": "Your car"
+}

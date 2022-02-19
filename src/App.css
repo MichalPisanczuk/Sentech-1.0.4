@@ -1,0 +1,38 @@
+.cointainer {
+  margin: 40px 60px;
+}
+
+.page-title {
+  padding-bottom: 30px;
+  padding-top: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+label {
+  font-size: 10vh;
+  font-weight: bold;
+  opacity: 0.2;
+}
+
+.search-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+select {
+  padding: 10px 20px;
+  width: 65%;
+}
+
+@media screen and (max-width: 700px) {
+  select {
+    width: 95%;
+  }
+}
+
+.hidden {
+  display: none;
+}

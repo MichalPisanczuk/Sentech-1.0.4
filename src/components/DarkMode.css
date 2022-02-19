@@ -1,0 +1,85 @@
+.mode-switch {
+  background-color: red;
+  border: solid 2px #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  height: 20px;
+  outline-width: 5px;
+  position: relative;
+  width: 60px;
+}
+
+.icon-switch {
+  background-color: grey;
+  border-radius: 100%;
+  content: "";
+  display: block;
+  height: 13px;
+  margin: 0px 5px;
+  position: relative;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 13px;
+}
+
+/* LIGHT MODE */
+body.light {
+  --color-bg: #fff;
+  --color-main: #000;
+}
+
+body.light .icon-switch {
+  background: grey;
+  transform: translateX(0);
+}
+
+body.light .icon-switch::after {
+  content: none;
+}
+
+/* DARK MODE */
+
+body.dark {
+  --color-bg: #000;
+  --color-main: #fff;
+}
+
+body.dark .icon-switch {
+  background: yellow;
+  transform: translateX(30px);
+}
+
+body.dark .icon-switch::after {
+  background-color: red;
+  border-radius: 100%;
+  content: "";
+  display: block;
+  height: 13px;
+  left: -5px;
+  position: absolute;
+  top: -2px;
+  width: 13px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --color-bg: #000;
+    --color-main: #fff;
+  }
+
+  body .icon-switch {
+    background: yellow;
+    transform: translateX(30px);
+  }
+
+  body .icon-switch::after {
+    background-color: red;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 14px;
+    left: -5px;
+    position: absolute;
+    top: -2px;
+    width: 12px;
+  }
+} ;

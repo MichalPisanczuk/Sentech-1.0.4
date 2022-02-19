@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;900&display=swap");
+
+/* Dark Mode Styles */
+
+:root {
+  --color-bg: #fff;
+  --color-main: #000;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-main);
+  transition: background-color 0.3s;
+}

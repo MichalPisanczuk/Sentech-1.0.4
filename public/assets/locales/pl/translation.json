@@ -1,0 +1,18 @@
+{
+  "Catalogue": "Katalog systemów zapłonowych Sentech",
+  "Make": "Marka",
+  "Model": "Model",
+  "Engine": "Silnik",
+  "Year": "Rocznik",
+  "Power": "Moc KM (kW)",
+  "Wires": "Przewody zapłonowe",
+  "Copper_Wires": "Miedziane przewody zapłonowe",
+  "Coils": "Cewki zapłonowe",
+  "Repair_Kit": "Zestaw naprawczy",
+  "Bar": "Listwa",
+  "Choice_Make": "Marka",
+  "Choice_Model": "Model",
+  "Choice_Engine": "Silnik",
+  "Make_Selection": "Wybierz",
+  "Your_car": "Twój samochód"
+}

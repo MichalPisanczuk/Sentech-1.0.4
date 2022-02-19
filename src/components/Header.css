@@ -1,0 +1,14 @@
+.header {
+  align-items: center;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  height: 65px;
+  justify-content: space-between;
+  padding: 0 40px 0 40px;
+  width: 100%;
+}
+
+.btn-link {
+  color: #fff !important;
+}

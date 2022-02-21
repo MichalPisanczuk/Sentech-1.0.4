@@ -14,5 +14,11 @@
   "Choice_Model": "Model",
   "Choice_Engine": "Motor",
   "Make_Selection": "Selecteren",
-  "Your_car": "Jouw auto"
+  "Your_car": "Jouw auto",
+  "Make_Selection_Make": "Merk",
+  "Make_Selection_Model": "Model",
+  "Make_Selection_Engine": "Motor",
+  "Part number": "Vul het nummer in van het product dat u zoekt",
+  "Replace part number": "Voer het vervangingsnummer in",
+  "Search": "Zoekopdracht"
 }

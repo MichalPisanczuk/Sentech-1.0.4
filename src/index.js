@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HttpApi from "i18next-http-backend";
 import Header from "./components/Header";
 import Details from "./components/Details";
-import ImagePreview from "./components/ImagePreview";
 import App from "./App";
 import ScrollToTop from "./components/ScrollToTop";
 import "bootstrap/dist/js/bootstrap.js";
@@ -27,7 +26,7 @@ i18n
       caches: ["cookie"],
     },
     backend: {
-      loadPath: "/Sentech-1.0.3/assets/locales/{{lng}}/translation.json",
+      loadPath: process.env.PUBLIC_URL + "/assets/locales/{{lng}}/translation.json",
     },
     react: {
       useSuspense: false,
@@ -42,7 +41,6 @@ ReactDOM.render(
         <Switch>
           <Route path='/' exact component={App} />
           <Route path='/details/:type/:id/:choicedMake/:choicedModel/:choicedEngine' component={Details} />
-          <Route path='/photo/:id/' component={ImagePreview} />
         </Switch>
       </ScrollToTop>
     </Router>

@@ -14,5 +14,11 @@
   "Choice_Model": "Model",
   "Choice_Engine": "Engine",
   "Make_Selection": "Select",
-  "Your_car": "Your car"
+  "Your_car": "Your car",
+  "Make_Selection_Make": "Make",
+  "Make_Selection_Model": "Model",
+  "Make_Selection_Engine": "Engine",
+  "Part number": "Enter the number of the product",
+  "Replace part number": "Enter the replacement number",
+  "Search": "Search"
 }

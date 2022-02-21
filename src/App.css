@@ -9,26 +9,47 @@
   width: 100%;
 }
 
-label {
-  font-size: 10vh;
-  font-weight: bold;
-  opacity: 0.2;
-}
-
 .search-form {
   align-items: center;
+  background-color: #ccc;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  padding: 20px;
 }
 
-select {
+select,
+input {
   padding: 10px 20px;
-  width: 65%;
+  width: 100%;
+}
+
+.first_col,
+.second_col {
+  margin: 20px 40px;
+  width: 50%;
+}
+
+.car-make,
+.car-model,
+.car-engine,
+.partno,
+.replacepartno {
+  margin-top: 15px;
+}
+
+button.search-btn {
+  background-color: red;
+  border: 0px;
+  color: #fff;
+  margin-top: 10px;
+  padding: 10px 20px;
+  float: right;
 }
 
 @media screen and (max-width: 700px) {
-  select {
+  select,
+  input {
     width: 95%;
   }
 }

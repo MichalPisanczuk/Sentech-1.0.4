@@ -14,5 +14,11 @@
   "Choice_Model": "Model",
   "Choice_Engine": "Silnik",
   "Make_Selection": "Wybierz",
-  "Your_car": "Twój samochód"
+  "Your_car": "Twój samochód",
+  "Make_Selection_Make": "Marka",
+  "Make_Selection_Model": "Model",
+  "Make_Selection_Engine": "Silnik",
+  "Part number": "Wpisz numer szukanego produktu",
+  "Replace part number": "Wpisz numer zamiennika",
+  "Search": "Szukaj"
 }

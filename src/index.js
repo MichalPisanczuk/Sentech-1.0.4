@@ -40,7 +40,7 @@ ReactDOM.render(
       <ScrollToTop>
         <Switch>
           <Route path='/' exact component={App} />
-          <Route path='/details/:type/:id/:choicedMake/:choicedModel/:choicedEngine' component={Details} />
+          <Route path='/details/:type/:partId/:choicedMake/:choicedModel/:choicedEngine' component={Details} />
         </Switch>
       </ScrollToTop>
     </Router>

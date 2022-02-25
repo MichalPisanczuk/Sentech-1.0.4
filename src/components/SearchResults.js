@@ -1,15 +1,38 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../components/SearchResults.css";
+import { useTranslation } from "react-i18next";
 
-function searchResults(props) {
-  let searchResult = [props.allCarsArray];
+function SearchResults(props) {
+  const { t } = useTranslation();
+  let searchResult = [];
 
   if (props.partId) {
     searchResult = props.allCarsArray.filter((itemOryginalPart) => {
       return itemOryginalPart.Przewody == props.partId;
     });
   }
+  if (props.partId && searchResult.length === 0) {
+    searchResult = props.allCarsArray.filter((itemOryginalPart) => {
+      return itemOryginalPart.Przewody_miedziane == props.partId;
+    });
+  }
+  if (props.partId && searchResult.length === 0) {
+    searchResult = props.allCarsArray.filter((itemOryginalPart) => {
+      return itemOryginalPart.Cewka == props.partId;
+    });
+  }
+  if (props.partId && searchResult.length === 0) {
+    searchResult = props.allCarsArray.filter((itemOryginalPart) => {
+      return itemOryginalPart.Zestaw_naprawczy == props.partId;
+    });
+  }
+  if (props.partId && searchResult.length === 0) {
+    searchResult = props.allCarsArray.filter((itemOryginalPart) => {
+      return itemOryginalPart.Listwa == props.partId;
+    });
+  }
+
   if (props.selectedCarMake) {
     searchResult = props.allCarsArray.filter((itemMake) => {
       return itemMake.Marka == props.selectedCarMake;
@@ -29,16 +52,16 @@ function searchResults(props) {
   return (
     <div className='result-grid'>
       <div className={props.selectedCarMake || props.partId ? "result-title row" : "hidden"}>
-        <div className='col'>{props.t("Make")}</div>
-        <div className='col'>{props.t("Model")}</div>
-        <div className='col'>{props.t("Engine")}</div>
-        <div className='col'>{props.t("Year")}</div>
-        <div className='col'>{props.t("Power")}</div>
-        <div className='col'>{props.t("Wires")}</div>
-        <div className='col'>{props.t("Copper_Wires")}</div>
-        <div className='col'>{props.t("Coils")}</div>
-        <div className='col'>{props.t("Repair_Kit")}</div>
-        <div className='col'>{props.t("Bar")}</div>
+        <div className='col'>{t("Make")}</div>
+        <div className='col'>{t("Model")}</div>
+        <div className='col'>{t("Engine")}</div>
+        <div className='col'>{t("Year")}</div>
+        <div className='col'>{t("Power")}</div>
+        <div className='col'>{t("Wires")}</div>
+        <div className='col'>{t("Copper_Wires")}</div>
+        <div className='col'>{t("Coils")}</div>
+        <div className='col'>{t("Repair_Kit")}</div>
+        <div className='col'>{t("Bar")}</div>
       </div>
 
       <div>
@@ -47,8 +70,8 @@ function searchResults(props) {
           if (item.Rok_do === undefined) item.Rok_do = "";
 
           return (
-            <div className={props.selectedCarMake || props.partId ? "result-data row" : "hidden"}>
-              <div className={index % 2 === 0 ? "result-data row" : "result-data row even"} key={index.toString()}>
+            <div className={props.selectedCarMake || props.partId ? "result-data row" : "hidden"} key={index.toString()}>
+              <div className={index % 2 === 0 ? "result-data row" : "result-data row even"}>
                 <div className='col'>{item.Marka}</div>
                 <div className='col'>{item.Typ_model}</div>
                 <div className='col'>{item.Pojemnosc_silnik}</div>
@@ -60,8 +83,8 @@ function searchResults(props) {
                   </span>
                 </div>
                 <div className='col'>
-                  <span className={item.PrzewodyMiedziane ? "result-link" : ""}>
-                    <Link to={`/details/copperwires/${item.PrzewodyMiedziane}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.PrzewodyMiedziane}</Link>
+                  <span className={item.Przewody_miedziane ? "result-link" : ""}>
+                    <Link to={`/details/copperwires/${item.Przewody_miedziane}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.Przewody_miedziane}</Link>
                   </span>
                 </div>
                 <div className='col'>
@@ -75,8 +98,8 @@ function searchResults(props) {
                   </span>
                 </div>
                 <div className='col'>
-                  <span className={item.llistwa ? "result-link" : ""}>
-                    <Link to={`/details/bar/${item.llistwa}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.llistwa}</Link>
+                  <span className={item.Listwa ? "result-link" : ""}>
+                    <Link to={`/details/bar/${item.llistwa}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.Listwa}</Link>
                   </span>
                 </div>
               </div>
@@ -88,4 +111,4 @@ function searchResults(props) {
   );
 }
 
-export default searchResults;
+export default SearchResults;

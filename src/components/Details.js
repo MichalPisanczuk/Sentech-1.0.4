@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import myDataBase from "../database.json";
@@ -18,8 +18,26 @@ let searchItem = "";
 
 function Details() {
   const { t } = useTranslation();
-  let { type, id, choicedMake, choicedModel, choicedEngine } = useParams();
+  let { type, partId, choicedMake, choicedModel, choicedEngine } = useParams();
   let path = "";
+
+  switch (type) {
+    case "wires":
+      path = "sets";
+      break;
+    case "copperwires":
+      path = "sets";
+      break;
+    case "coils":
+      path = "coils";
+      break;
+    case "repairkit":
+      path = "coils";
+      break;
+    case "bar":
+      path = "sets";
+      break;
+  }
 
   myDataBase.map((post) => {
     if (choicedMake == post.Marka && choicedModel == post.Model && choicedEngine == post.Silnik) {
@@ -36,25 +54,19 @@ function Details() {
     }
   });
 
-  if (type === "wires") path = "sets";
-  if (type === "copperwires") path = "sets";
-  if (type === "coils") path = "coils";
-  if (type === "repairkit") path = "coils";
-  if (type === "bar") path = "sets";
-
   return (
     <>
       <div className='content'>
         <div className='result-content'>
           <div className='photo-result-content'>
             {/* <Link to={`/photo/${id}`}> */}
-            <img alt={id} className='photo-img' src={`http://sentech.pl/pictures/${path}1/${id}.jpg`} />
+            <img alt={partId} className='photo-img' src={`http://sentech.pl/pictures/${path}1/${partId}.jpg`} />
             {/* </Link> */}
             {/* <Link to={`/photo/${id}`}> */}
-            <img alt={id} className='photo-img' src={`http://sentech.pl/pictures/${path}2/${id}.jpg`} />
+            <img alt={partId} className='photo-img' src={`http://sentech.pl/pictures/${path}2/${partId}.jpg`} />
             {/* </Link> */}
             {/* <Link to={`/photo/${id}`}> */}
-            <img alt={id} className='photo-img' src={`http://sentech.pl/pictures/${path}3/${id}.jpg`} />
+            <img alt={partId} className='photo-img' src={`http://sentech.pl/pictures/${path}3/${partId}.jpg`} />
             {/* </Link> */}
           </div>
           <div className='car-result-content'>
@@ -126,7 +138,7 @@ function Details() {
             if (type == "coils") searchItem = item.__EMPTY_4;
             if (type == "repairkit") searchItem = item.ZestawNaprawczy;
             if (type == "bar") searchItem = item.listwa;
-            if (id == searchItem) {
+            if (partId == searchItem) {
               index++;
               return (
                 <div className={index % 2 === 0 ? "result-data row" : "result-data row even"}>

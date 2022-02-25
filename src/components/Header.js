@@ -17,7 +17,7 @@ const languages = [
   },
   {
     code: "de",
-    name: "Duits",
+    name: "Deutsch",
     country_code: "de",
   },
   {

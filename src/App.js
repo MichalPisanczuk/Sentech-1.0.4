@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import SearchResultsDetails from "../src/components/SearchResultsDetails";
+import SearchResults from "./components/SearchResults";
 import axios from "axios";
-import myDataBase from "../src/database.json";
 import "./App.css";
 
 let makes = [];
@@ -14,11 +13,13 @@ const apiUrl = "https://api-sentech.herokuapp.com/parts";
 function App() {
   const { t } = useTranslation();
 
-  const [carMake, setCarMake] = useState(null);
-  const [carModel, setCarModel] = useState(null);
-  const [carEngine, setCarEngine] = useState(null);
+  const [carMake, setCarMake] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [carEngine, setCarEngine] = useState("");
+  const [partId, setPartId] = useState("");
+  const [substitutePartId, setSubstitutePartId] = useState("");
 
-  const [car, setCar] = useState([]);
+  const [cars, setCar] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -40,38 +41,38 @@ function App() {
       });
   }, []);
 
-  const arr = car.map((item, index) => {
-    return (
-      <p key={item.Id}>
-        {item.Marka} - {item.Nazwa} - {item.Moc}
-      </p>
-    );
-  });
-
-  myDataBase.map((post) => {
-    makes.push(post.Marka);
+  cars.map((item) => {
+    makes.push(item.Marka);
     makes = [...new Set(makes)];
+    models = [];
+    engines = [];
   });
 
-  models = [];
-  engines = [];
   if (carMake) {
-    myDataBase.map((post) => {
-      if (post.Marka == carMake) {
-        models.push(post.Model);
+    cars.map((item) => {
+      if (item.Marka == carMake) {
+        models.push(item.Typ_model);
         models = [...new Set(models)];
+        engines = [];
       }
     });
   }
-  engines = [];
+
   if (carMake && carModel) {
-    myDataBase.map((post) => {
-      if (post.Marka == carMake && post.Model == carModel) {
-        engines.push(post.Silnik);
+    cars.map((item) => {
+      if (item.Marka == carMake && item.Typ_model == carModel) {
+        engines.push(item.Pojemnosc_silnik);
         engines = [...new Set(engines)];
       }
     });
   }
+
+  useEffect(() => {
+    if (partId.length > 2) {
+      const timeOut = setTimeout(() => setPartId(partId), 2000);
+      return () => clearTimeout(timeOut);
+    }
+  }, [partId]);
 
   return (
     <>
@@ -81,14 +82,23 @@ function App() {
         </div>
         <div className='search-form'>
           <div className='first_col'>
-            <select name='marka' id='marka' className='car-marka' value={carMake} onChange={(e) => setCarMake(e.target.value)}>
+            <select
+              name='marka'
+              id='marka'
+              className='car-marka'
+              value={carMake}
+              onChange={(e) => {
+                setCarMake(e.target.value);
+                setPartId("");
+              }}
+            >
               <option value='undefined' key='undefined' id='makeSelect'>
                 {t("Make_Selection_Make")}
               </option>
-              {makes.map((markaItem) => {
+              {makes.map((makeItem) => {
                 return (
-                  <option key={markaItem} value={markaItem} id='makeSelect'>
-                    {markaItem}
+                  <option key={makeItem} value={makeItem} id='makeSelect'>
+                    {makeItem}
                   </option>
                 );
               })}
@@ -121,20 +131,34 @@ function App() {
             </select>
           </div>
           <div className='second_col'>
-            <input name='partno' id='partno' className='partno' placeholder={t("Part number")}></input>
-            <input name='replacepartno' id='replacepartno' className='replacepartno' placeholder={t("Replace part number")}></input>
-            <button className='search-btn'>{t("Search")}</button>
+            <div>
+              <h4>{t("Find a product")}</h4>
+            </div>
+            <form>
+              <input
+                name='partno'
+                id='partno'
+                className='partno'
+                placeholder={t("Part number")}
+                value={partId}
+                onChange={(e) => {
+                  setPartId(e.target.value);
+                  setCarMake("");
+                  setCarModel("");
+                  setCarEngine("");
+                }}
+              />
+              <input disabled name='replacepartno' id='replacepartno' className='replacepartno' placeholder={t("Replace part number")} onChange={(e) => setSubstitutePartId(e.target.value)} />
+            </form>
           </div>
         </div>
-        <section className={carEngine !== "null" && carMake !== "null" && carModel !== "null" ? "details-results" : "hidden"}>
-          {console.log(carEngine)}
-          <SearchResultsDetails carMake={carMake} carModel={carModel} carEngine={carEngine} t={t} />
+        <section className='details-results'>
+          <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId} t={t} />
         </section>
       </div>
       <div>
         <h1>{loading ? "ŁADOWANIE DANYCH..." : ""}</h1>
         <div>{errorMsg}</div>
-        <div>{arr}</div>
       </div>
     </>
   );

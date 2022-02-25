@@ -18,7 +18,8 @@
   "Make_Selection_Make": "Marka",
   "Make_Selection_Model": "Model",
   "Make_Selection_Engine": "Silnik",
-  "Part number": "Wpisz numer szukanego produktu",
-  "Replace part number": "Wpisz numer zamiennika",
-  "Search": "Szukaj"
+  "Part number": "Wpisz numer szukanego produktu (min 3 znaki)",
+  "Replace part number": "Wpisz numer zamiennika (min 3 znaki)",
+  "Search": "Szukaj",
+  "Find a product": "Znajdź produkt:"
 }

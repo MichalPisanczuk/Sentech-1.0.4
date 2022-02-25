@@ -18,7 +18,8 @@
   "Make_Selection_Make": "Бренд",
   "Make_Selection_Model": "Модель",
   "Make_Selection_Engine": "Двигатель",
-  "Part number": "Введите номер продукта, который вы ищете",
-  "Replace part number": "Введите номер замены",
-  "Search": "Поиск"
+  "Part number": "Введите номер продукта, который вы ищете (минимум 3 символа)",
+  "Replace part number": "Введите номер замены (минимум 3 символа)",
+  "Search": "Поиск",
+  "Find a product": "Найти товар:"
 }

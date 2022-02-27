@@ -1,56 +1,115 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import myDataBase from "../database.json";
-import myDataBaseAll from "../database.json";
+import axios from "axios";
+import SearchResults from "./SearchResults";
 import "../components/Details.css";
 
-let year = "";
-let power = "";
-let wires = "";
-let copperWires = "";
-let coils = "";
-let repairKit = "";
-let bar = "";
-
-let index = 0;
-let searchItem = "";
+const apiUrl = "https://api-sentech.herokuapp.com/parts";
 
 function Details() {
   const { t } = useTranslation();
   let { type, partId, choicedMake, choicedModel, choicedEngine } = useParams();
-  let path = "";
+  const [hideCar, setHideCar] = useState(false);
 
-  switch (type) {
-    case "wires":
-      path = "sets";
-      break;
-    case "copperwires":
-      path = "sets";
-      break;
-    case "coils":
-      path = "coils";
-      break;
-    case "repairkit":
-      path = "coils";
-      break;
-    case "bar":
-      path = "sets";
-      break;
-  }
+  const [cars, setCar] = useState([]);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  myDataBase.map((post) => {
-    if (choicedMake == post.Marka && choicedModel == post.Model && choicedEngine == post.Silnik) {
-      choicedMake = post.Marka;
-      choicedModel = post.Model;
-      choicedEngine = post.Silnik;
-      year = post.Rocznik + post.__EMPTY + post.__EMPTY_1;
-      power = post.KM;
-      wires = post.__EMPTY_2;
-      copperWires = post.__EMPTY_3;
-      coils = post.__EMPTY_4;
-      repairKit = post.ZestawNaprawczy;
-      bar = post.llistwa;
+  let make,
+    model,
+    engine,
+    year,
+    power,
+    cylinders,
+    wires,
+    copperWires,
+    coils,
+    repairKit,
+    bar,
+    oem,
+    photo_wires_1,
+    photo_wires_2,
+    photo_wires_3,
+    photo_copper_1,
+    photo_copper_2,
+    photo_copper_3,
+    photo_coils_1,
+    photo_coils_2,
+    photo_coils_3,
+    photo_RepairKit_1,
+    photo_bar_1,
+    photo_bar_2,
+    photo_bar_3 = "";
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setCar(response.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 404) console.log("API not found");
+          setErrorMsg(`API not found ${error.response.status}`);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  cars.map((item) => {
+    if (item.Rok_od === "undefined") item.Rok_od = "";
+    if (item.Rok_do === "undefined") item.Rok_do = "";
+    if (
+      (partId == item.Przewody || partId == item.Przewody_miedziane || partId == item.Cewka || partId == item.Listwa || partId == item.Zestaw_naprawczy) &&
+      choicedMake == item.Marka &&
+      choicedModel == item.Typ_model &&
+      choicedEngine == item.Pojemnosc_silnik
+    ) {
+      console.log("Jestem w pętli ogólnej");
+      make = item.Marka;
+      model = item.Typ_model;
+      engine = item.Pojemnosc_silnik;
+      power = item.Moc;
+      cylinders = item.Ilosc_cylindrow;
+      year = item.Rok_od + "-" + item.Rok_do;
+      wires = item.Przewody;
+      copperWires = item.Przewody_miedziane;
+      coils = item.Cewka;
+      repairKit = item.Zestaw_naprawczy;
+      bar = item.Listwa;
+      oem = item.Oem;
+      photo_wires_1 = item.Photo_Przewody_1;
+      photo_wires_2 = item.Photo_Przewody_2;
+      photo_wires_3 = item.Photo_Przewody_3;
+      photo_copper_1 = item.Photo_Przewody_Miedziane_1;
+      photo_copper_2 = item.Photo_Przewody_Miedziane_2;
+      photo_copper_3 = item.Photo_Przewody_Miedziane_3;
+      photo_coils_1 = item.Photo_Cewki_1;
+      photo_coils_2 = item.Photo_Cewki_2;
+      photo_coils_3 = item.Photo_Cewki_3;
+      photo_RepairKit_1 = item.Photo_RepairKit_1;
+      photo_bar_1 = item.Photo_Listwa_1;
+      photo_bar_2 = item.Photo_Listwa_2;
+      photo_bar_3 = item.Photo_Listwa_3;
+    } else if (partId == item.Przewody || partId == item.Przewody_miedziane || partId == item.Cewka || partId == item.Listwa || partId == item.Zestaw_naprawczy) {
+      console.log("Jstem w pętli zdjęć");
+      photo_wires_1 = item.Photo_Przewody_1;
+      photo_wires_2 = item.Photo_Przewody_2;
+      photo_wires_3 = item.Photo_Przewody_3;
+      photo_copper_1 = item.Photo_Przewody_Miedziane_1;
+      photo_copper_2 = item.Photo_Przewody_Miedziane_2;
+      photo_copper_3 = item.Photo_Przewody_Miedziane_3;
+      photo_coils_1 = item.Photo_Cewki_1;
+      photo_coils_2 = item.Photo_Cewki_2;
+      photo_coils_3 = item.Photo_Cewki_3;
+      photo_RepairKit_1 = item.Photo_RepairKit_1;
+      photo_bar_1 = item.Photo_Listwa_1;
+      photo_bar_2 = item.Photo_Listwa_2;
+      photo_bar_3 = item.Photo_Listwa_3;
     }
   });
 
@@ -59,26 +118,33 @@ function Details() {
       <div className='content'>
         <div className='result-content'>
           <div className='photo-result-content'>
-            {/* <Link to={`/photo/${id}`}> */}
-            <img alt={partId} className='photo-img' src={`http://sentech.pl/pictures/${path}1/${partId}.jpg`} />
-            {/* </Link> */}
-            {/* <Link to={`/photo/${id}`}> */}
-            <img alt={partId} className='photo-img' src={`http://sentech.pl/pictures/${path}2/${partId}.jpg`} />
-            {/* </Link> */}
-            {/* <Link to={`/photo/${id}`}> */}
-            <img alt={partId} className='photo-img' src={`http://sentech.pl/pictures/${path}3/${partId}.jpg`} />
-            {/* </Link> */}
+            <img alt={partId} className={photo_wires_1 && type === "wires" ? "photo-img" : "hidden"} src={photo_wires_1} />
+            <img alt={partId} className={photo_wires_2 && type === "wires" ? "photo-img" : "hidden"} src={photo_wires_2} />
+            <img alt={partId} className={photo_wires_3 && type === "wires" ? "photo-img" : "hidden"} src={photo_wires_3} />
+            <img alt={partId} className={photo_copper_1 && type === "copperwires" ? "photo-img" : "hidden"} src={photo_copper_1} />
+            <img alt={partId} className={photo_copper_2 && type === "copperwires" ? "photo-img" : "hidden"} src={photo_copper_2} />
+            <img alt={partId} className={photo_copper_3 && type === "copperwires" ? "photo-img" : "hidden"} src={photo_copper_3} />
+            <img alt={partId} className={photo_coils_1 && type === "coils" ? "photo-img" : "hidden"} src={photo_coils_1} />
+            <img alt={partId} className={photo_coils_2 && type === "coils" ? "photo-img" : "hidden"} src={photo_coils_2} />
+            <img alt={partId} className={photo_coils_3 && type === "coils" ? "photo-img" : "hidden"} src={photo_coils_3} />
+            <img alt={partId} className={photo_RepairKit_1 && type === "repairkit" ? "photo-img" : "hidden"} src={photo_RepairKit_1} />
+            <img alt={partId} className={photo_bar_1 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_1} />
+            <img alt={partId} className={photo_bar_2 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_2} />
+            <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_3} />
           </div>
-          <div className='car-result-content'>
+          <div className={hideCar ? "car-result-content" : "hidden"}>
             <h3>{t("Your_car")}</h3>
             <p>
-              {t("Make")}: {choicedMake}
+              {t("Make")}: {make}
             </p>
             <p>
-              {t("Model")}: {choicedModel}
+              {t("Model")}: {model}
             </p>
             <p>
-              {t("Engine")}: {choicedEngine}
+              {t("Engine")}: {engine}
+            </p>
+            <p>
+              {t("Cylinders")}: {cylinders}
             </p>
             <p>
               {t("Year")}: {year}
@@ -118,64 +184,12 @@ function Details() {
             </p>
           </div>
         </div>
-
-        <div className='result-grid'>
-          <div className='result-title row'>
-            <div className='col'>{t("Make")}</div>
-            <div className='col'>{t("Model")}</div>
-            <div className='col'>{t("Engine")}</div>
-            <div className='col'>{t("Year")}</div>
-            <div className='col'>{t("Power")}</div>
-            <div className='col'>{t("Wires")}</div>
-            <div className='col'>{t("Copper_Wires")}</div>
-            <div className='col'>{t("Coils")}</div>
-            <div className='col'>{t("Repair_Kit")}</div>
-            <div className='col'>{t("Bar")}</div>
-          </div>
-          {myDataBaseAll.map((item) => {
-            if (type == "wires") searchItem = item.__EMPTY_2;
-            if (type == "copperwires") searchItem = item.__EMPTY_3;
-            if (type == "coils") searchItem = item.__EMPTY_4;
-            if (type == "repairkit") searchItem = item.ZestawNaprawczy;
-            if (type == "bar") searchItem = item.listwa;
-            if (partId == searchItem) {
-              index++;
-              return (
-                <div className={index % 2 === 0 ? "result-data row" : "result-data row even"}>
-                  <div className='col'>{item.Marka}</div>
-                  <div className='col'>{item.Model}</div>
-                  <div className='col'>{item.Silnik}</div>
-                  <div className='col'>{item.Rocznik + item.__EMPTY + item.__EMPTY_1}</div>
-                  <div className='col'>{item.KM}</div>
-                  <div className='col'>
-                    <span className={item.__EMPTY_2 ? "result-link" : ""}>
-                      <Link to={`/details/wires/${item.__EMPTY_2}/${item.Marka}/${item.Model}/${item.Silnik}`}>{item.__EMPTY_2}</Link>
-                    </span>
-                  </div>
-                  <div className='col'>
-                    <span className={item.__EMPTY_3 ? "result-link" : ""}>
-                      <Link to={`/details/copperwires/${item.__EMPTY_3}/${item.Marka}/${item.Model}/${item.Silnik}`}>{item.__EMPTY_3}</Link>
-                    </span>
-                  </div>
-                  <div className='col'>
-                    <span className={item.__EMPTY_4 ? "result-link" : ""}>
-                      <Link to={`/details/coils/${item.__EMPTY_4}/${item.Marka}/${item.Model}/${item.Silnik}`}>{item.__EMPTY_4}</Link>
-                    </span>
-                  </div>
-                  <div className='col'>
-                    <span className={item.ZestawNaprawczy ? "result-link" : ""}>
-                      <Link to={`/details/repairkit/${item.ZestawNaprawczy}/${item.Marka}/${item.Model}/${item.Silnik}`}>{item.ZestawNaprawczy}</Link>
-                    </span>
-                  </div>
-                  <div className='col'>
-                    <span className={item.listwa ? "result-link" : ""}>
-                      <Link to={`/details/bar/${item.listwa}/${item.Marka}/${item.Model}/${item.Silnik}`}>{item.listwa}</Link>
-                    </span>
-                  </div>
-                </div>
-              );
-            }
-          })}
+        <section className='details-results'>
+          <SearchResults allCarsArray={cars} partId={partId} t={t} />
+        </section>
+        <div>
+          <h1>{loading ? "ŁADOWANIE DANYCH..." : ""}</h1>
+          <div>{errorMsg}</div>
         </div>
       </div>
     </>

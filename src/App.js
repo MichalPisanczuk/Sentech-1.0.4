@@ -77,6 +77,10 @@ function App() {
   return (
     <>
       <div className='container'>
+        <div>
+          <h1>{loading ? "ŁADOWANIE DANYCH..." : ""}</h1>
+          <div>{errorMsg}</div>
+        </div>
         <div className='page-title'>
           <h2>{t("Catalogue")}</h2>
         </div>
@@ -156,12 +160,7 @@ function App() {
           <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId} t={t} />
         </section>
       </div>
-      <div>
-        <h1>{loading ? "ŁADOWANIE DANYCH..." : ""}</h1>
-        <div>{errorMsg}</div>
-      </div>
     </>
   );
 }
-
 export default App;

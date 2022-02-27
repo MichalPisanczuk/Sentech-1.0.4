@@ -10,7 +10,8 @@ const apiUrl = "https://api-sentech.herokuapp.com/parts";
 function Details() {
   const { t } = useTranslation();
   let { type, partId, choicedMake, choicedModel, choicedEngine } = useParams();
-  const [hideCar, setHideCar] = useState(false);
+
+  let hideCar = false;
 
   const [cars, setCar] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
@@ -69,7 +70,7 @@ function Details() {
       choicedModel == item.Typ_model &&
       choicedEngine == item.Pojemnosc_silnik
     ) {
-      console.log("Jestem w pętli ogólnej");
+      hideCar = false;
       make = item.Marka;
       model = item.Typ_model;
       engine = item.Pojemnosc_silnik;
@@ -95,8 +96,15 @@ function Details() {
       photo_bar_1 = item.Photo_Listwa_1;
       photo_bar_2 = item.Photo_Listwa_2;
       photo_bar_3 = item.Photo_Listwa_3;
-    } else if (partId == item.Przewody || partId == item.Przewody_miedziane || partId == item.Cewka || partId == item.Listwa || partId == item.Zestaw_naprawczy) {
-      console.log("Jstem w pętli zdjęć");
+    } else if (
+      partId == item.Przewody ||
+      partId == item.Przewody_miedziane ||
+      partId == item.Cewka ||
+      partId == item.Listwa ||
+      partId == item.Zestaw_naprawczy ||
+      (choicedMake == item.Marka && choicedModel == item.Typ_model && choicedEngine == item.Pojemnosc_silnik)
+    ) {
+      hideCar = true;
       photo_wires_1 = item.Photo_Przewody_1;
       photo_wires_2 = item.Photo_Przewody_2;
       photo_wires_3 = item.Photo_Przewody_3;
@@ -116,6 +124,10 @@ function Details() {
   return (
     <>
       <div className='content'>
+        <div className='message'>
+          <h1>{loading ? t("loading") : ""}</h1>
+          <div>{errorMsg}</div>
+        </div>
         <div className='result-content'>
           <div className='photo-result-content'>
             <img alt={partId} className={photo_wires_1 && type === "wires" ? "photo-img" : "hidden"} src={photo_wires_1} />
@@ -135,13 +147,13 @@ function Details() {
           <div className={hideCar ? "car-result-content" : "hidden"}>
             <h3>{t("Your_car")}</h3>
             <p>
-              {t("Make")}: {make}
+              {t("Make")}: {choicedMake}
             </p>
             <p>
-              {t("Model")}: {model}
+              {t("Model")}: {choicedModel}
             </p>
             <p>
-              {t("Engine")}: {engine}
+              {t("Engine")}: {choicedEngine}
             </p>
             <p>
               {t("Cylinders")}: {cylinders}
@@ -187,10 +199,6 @@ function Details() {
         <section className='details-results'>
           <SearchResults allCarsArray={cars} partId={partId} t={t} />
         </section>
-        <div>
-          <h1>{loading ? "ŁADOWANIE DANYCH..." : ""}</h1>
-          <div>{errorMsg}</div>
-        </div>
       </div>
     </>
   );

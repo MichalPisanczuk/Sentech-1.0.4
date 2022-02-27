@@ -21,5 +21,6 @@
   "Part number": "Geben Sie die Nummer des Produkts ein (mindestens 3 Zeichen)",
   "Replace part number": "Ersatznummer eingeben (mindestens 3 Zeichen)",
   "Search": "Suche",
-  "Find a product": "Produkt suchen:"
+  "Find a product": "Produkt suchen:",
+  "loading": "Daten werden geladen ..."
 }

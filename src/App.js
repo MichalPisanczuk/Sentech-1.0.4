@@ -77,8 +77,8 @@ function App() {
   return (
     <>
       <div className='container'>
-        <div>
-          <h1>{loading ? "ŁADOWANIE DANYCH..." : ""}</h1>
+        <div className='message'>
+          <h1>{loading ? t("loading") : ""}</h1>
           <div>{errorMsg}</div>
         </div>
         <div className='page-title'>

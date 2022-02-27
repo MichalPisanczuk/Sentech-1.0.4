@@ -21,5 +21,6 @@
   "Part number": "Enter the number of the product you are looking for (at least 3 characters)",
   "Replace part number": "Enter the replacement number (min 3 characters)",
   "Search": "Search",
-  "Find a product": "Find a product:"
+  "Find a product": "Find a product:",
+  "loading": "Loading data..."
 }

@@ -21,5 +21,6 @@
   "Part number": "Wpisz numer szukanego produktu (min 3 znaki)",
   "Replace part number": "Wpisz numer zamiennika (min 3 znaki)",
   "Search": "Szukaj",
-  "Find a product": "Znajdź produkt:"
+  "Find a product": "Znajdź produkt:",
+  "loading": "Trwa łądowanie danych..."
 }

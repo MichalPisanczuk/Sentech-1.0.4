@@ -57,3 +57,7 @@ button.search-btn {
 .hidden {
   display: none;
 }
+
+.message {
+  text-align: center;
+}

@@ -145,7 +145,7 @@ function Details() {
             <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_3} />
           </div>
           <div className={hideCar ? "car-result-content" : "hidden"}>
-            <h3>{t("Your_car")}</h3>
+            <h3>{t("Part details") + partId}</h3>
             <p>
               {t("Make")}: {choicedMake}
             </p>

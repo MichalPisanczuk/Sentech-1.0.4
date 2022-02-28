@@ -40,3 +40,11 @@
   font-weight: 600;
   color: #fff;
 }
+
+.result-data {
+  /* background-color: rgba(255, 255, 255, 1); */
+  border-bottom: 1px solid #ccc;
+  min-height: 45px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}

@@ -1,6 +1,6 @@
 {
   "Catalog": "Sentech ignition systems catalog",
-  "Make": "Brand",
+  "Make": "Make",
   "Model": "Model",
   "Engine": "Engine",
   "Year": "Yearbook",
@@ -10,17 +10,18 @@
   "Coils": "Ignition coils",
   "Repair_Kit": "Repair Kit",
   "Bar": "Bar",
-  "Choice_Make": "Brand",
+  "Choice_Make": "Make",
   "Choice_Model": "Model",
   "Choice_Engine": "Engine",
   "Make_Selection": "Select",
   "Your_car": "Your car",
-  "Make_Selection_Make": "Brand",
+  "Make_Selection_Make": "Make",
   "Make_Selection_Model": "Model",
   "Make_Selection_Engine": "Engine",
   "Part number": "Enter the number of the product you are looking for (at least 3 characters)",
   "Replace part number": "Enter the replacement number (min 3 characters)",
   "Search": "Search",
   "Find a product": "Find a product:",
-  "loading": "Loading data..."
+  "loading": "Loading data...",
+  "Part details": "Part details "
 }

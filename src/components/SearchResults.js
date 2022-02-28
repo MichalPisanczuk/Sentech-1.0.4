@@ -70,7 +70,7 @@ function SearchResults(props) {
           if (item.Rok_do === undefined) item.Rok_do = "";
 
           return (
-            <div className={props.selectedCarMake || props.partId ? "result-data row" : "hidden"} key={index.toString()}>
+            <div className={props.selectedCarMake || props.partId ? "" : "hidden"} key={index.toString()}>
               <div className={index % 2 === 0 ? "result-data row" : "result-data row even"}>
                 <div className='col'>{item.Marka}</div>
                 <div className='col'>{item.Typ_model}</div>

@@ -13,9 +13,9 @@
   align-items: center;
   background-color: #ccc;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-wrap: wrap;
   padding: 20px;
+  justify-content: center;
 }
 
 select,
@@ -27,7 +27,15 @@ input {
 .first_col,
 .second_col {
   margin: 20px 40px;
-  width: 50%;
+  width: 40%;
+}
+
+@media screen and (max-width: 769px) {
+  .first_col,
+  .second_col {
+    margin: 10px 5px;
+    width: 100%;
+  }
 }
 
 .car-make,

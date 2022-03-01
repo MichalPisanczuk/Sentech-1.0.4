@@ -126,7 +126,7 @@ function Details() {
       <div className='content'>
         <div className='message'>
           <h1>{loading ? t("loading") : ""}</h1>
-          <p>{t("loading info")}</p>
+          <p>{loading ? t("loading info") : ""}</p>
           <div>{errorMsg}</div>
         </div>
         <div className='result-content'>

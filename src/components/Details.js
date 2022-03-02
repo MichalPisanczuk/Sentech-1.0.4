@@ -128,6 +128,7 @@ function Details() {
           <h1>{loading ? t("loading") : ""}</h1>
           <p>{loading ? t("loading info") : ""}</p>
           <div>{errorMsg}</div>
+          <h3>{t("Part details") + partId}</h3>
         </div>
         <div className='result-content'>
           <div className='photo-result-content'>
@@ -146,7 +147,6 @@ function Details() {
             <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_3} />
           </div>
           <div className={hideCar ? "car-result-content" : "hidden"}>
-            <h3>{t("Part details") + partId}</h3>
             <p>
               {t("Make")}: {choicedMake}
             </p>

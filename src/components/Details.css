@@ -15,16 +15,30 @@
 
 .photo-result-content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
+  flex-wrap: wrap;
   padding: 0 25px;
+  width: 50%;
 }
 .photo-result-content img {
   padding: 20px;
 }
 
 .car-result-content {
-  width: 50%;
-  padding: 0 25px;
+  padding: 25px;
+}
+
+@media screen and (max-width: 769px) {
+  .car-result-content {
+    padding: 20px 5px;
+  }
+  .photo-result-content {
+    width: 100%;
+  }
+  .photo-result-content img {
+    width: 100%;
+  }
+  .result-content {
+    display: flex;
+    flex-direction: column;
+  }
 }

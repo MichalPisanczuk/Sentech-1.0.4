@@ -121,6 +121,10 @@ function Details() {
     }
   });
 
+  const goToShop = () => {
+    window.open(`http://www.stanczyk.pl/product/search?query=${partId}`, "blank");
+  };
+
   return (
     <>
       <div className='content'>
@@ -129,6 +133,9 @@ function Details() {
           <p>{loading ? t("loading info") : ""}</p>
           <div>{errorMsg}</div>
           <h3>{t("Part details") + partId}</h3>
+          <button className='shop-now' onClick={goToShop}>
+            {t("Kup teraz")}
+          </button>
         </div>
         <div className='result-content'>
           <div className='photo-result-content'>

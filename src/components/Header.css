@@ -12,3 +12,8 @@
 .btn-link {
   color: #fff !important;
 }
+@media screen and (max-width: 769px) {
+  .header {
+    padding: 0 10px 0 0px;
+  }
+}

@@ -70,3 +70,17 @@ button.search-btn {
   margin-top: 20px;
   text-align: center;
 }
+
+.shop-now {
+  background-color: #ff5a00;
+  border-radius: 5px;
+  border: 0px;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 18px;
+}
+
+.shop-now:hover {
+  background-color: #ec7434;
+  color: #fff;
+}

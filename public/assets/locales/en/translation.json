@@ -9,7 +9,7 @@
   "Copper_Wires": "Copper Ignition Wires",
   "Coils": "Ignition coils",
   "Repair_Kit": "Repair Kit",
-  "Bar": "Bar",
+  "Bar": "Ignition strip",
   "Choice_Make": "Make",
   "Choice_Model": "Model",
   "Choice_Engine": "Engine",
@@ -25,5 +25,5 @@
   "loading": "Loading data...",
   "loading info": "The first boot may take a while. I'm working on getting the latest data.",
   "Part details": "Part details ",
-  "Kup teraz": "Buy now"
+  "Buy now": "Buy now"
 }

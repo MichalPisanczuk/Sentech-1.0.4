@@ -176,8 +176,8 @@ function Details() {
           <p>{loading ? t("loading info") : ""}</p>
           <div>{errorMsg}</div>
           <h3>{t("Part details") + partId}</h3>
-          <button className='shop-now' onClick={goToShop}>
-            {t("Kup teraz")}
+          <button className='buy-now' onClick={goToShop}>
+            {t("Buy now")}
           </button>
         </div>
         <div className='result-content'>

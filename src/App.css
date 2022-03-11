@@ -71,8 +71,8 @@ button.search-btn {
   text-align: center;
 }
 
-.shop-now {
-  background-color: #ff5a00;
+.buy-now {
+  background-color: red;
   border-radius: 5px;
   border: 0px;
   color: #fff;
@@ -80,7 +80,7 @@ button.search-btn {
   font-size: 18px;
 }
 
-.shop-now:hover {
-  background-color: #ec7434;
+.buy-now:hover {
+  background-color: #d11515;
   color: #fff;
 }

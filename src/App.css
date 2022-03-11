@@ -70,17 +70,3 @@ button.search-btn {
   margin-top: 20px;
   text-align: center;
 }
-
-.buy-now {
-  background-color: red;
-  border-radius: 5px;
-  border: 0px;
-  color: #fff;
-  padding: 5px 15px;
-  font-size: 18px;
-}
-
-.buy-now:hover {
-  background-color: #d11515;
-  color: #fff;
-}

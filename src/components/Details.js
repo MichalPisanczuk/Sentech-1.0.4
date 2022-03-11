@@ -175,10 +175,6 @@ function Details() {
           <h1>{loading ? t("loading") : ""}</h1>
           <p>{loading ? t("loading info") : ""}</p>
           <div>{errorMsg}</div>
-          <h3>{t("Part details") + partId}</h3>
-          <button className='buy-now' onClick={goToShop}>
-            {t("Buy now")}
-          </button>
         </div>
         <div className='result-content'>
           <div className='photo-result-content'>
@@ -197,6 +193,12 @@ function Details() {
             <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_bar_3} />
           </div>
           <div className={hideCar ? "car-result-content" : "hidden"}>
+            <div className='details-header'>
+              <h3 className='part-header'>{t("Part details") + partId}</h3>
+              <button className='buy-now' onClick={goToShop}>
+                {t("Buy now")}
+              </button>
+            </div>
             <p>
               {t("Make")}: {choicedMake}
             </p>
@@ -253,7 +255,7 @@ function Details() {
       </div>
       <div className={hidePopup ? "popup hidden" : "popup"}>
         <button className='close-popup' onClick={showPopup}>
-          x
+          &#x2716;
         </button>
         <img alt={partId} className='popup__img' src={photoURL} />
         <button className='popup__arrow popup_arrow--left' onClick={previousIMG}>

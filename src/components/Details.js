@@ -12,6 +12,7 @@ function Details() {
   let { type, partId, choicedMake, choicedModel, choicedEngine } = useParams();
 
   let hideCar = false;
+  const [hidePopup, setHidePopup] = useState(true);
 
   const [cars, setCar] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
@@ -125,6 +126,23 @@ function Details() {
     window.open(`http://www.stanczyk.pl/product/search?query=${partId}`, "blank");
   };
 
+  const showPopup = () => {
+    hidePopup ? setHidePopup(false) : setHidePopup(true);
+  };
+
+  const [photoURL, setPhotoURL] = useState(null);
+  const getPhotoURL = () => {
+    const thumbnails = document.querySelectorAll(".photo-img");
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener("click", (e) => {
+        setPhotoURL(e.target.src);
+      });
+    });
+    if (photoURL !== null) {
+      showPopup();
+    }
+  };
+
   return (
     <>
       <div className='content'>
@@ -139,19 +157,19 @@ function Details() {
         </div>
         <div className='result-content'>
           <div className='photo-result-content'>
-            <img alt={partId} className={photo_wires_1 && type === "wires" ? "photo-img" : "hidden"} src={photo_wires_1} />
-            <img alt={partId} className={photo_wires_2 && type === "wires" ? "photo-img" : "hidden"} src={photo_wires_2} />
-            <img alt={partId} className={photo_wires_3 && type === "wires" ? "photo-img" : "hidden"} src={photo_wires_3} />
-            <img alt={partId} className={photo_copper_1 && type === "copperwires" ? "photo-img" : "hidden"} src={photo_copper_1} />
-            <img alt={partId} className={photo_copper_2 && type === "copperwires" ? "photo-img" : "hidden"} src={photo_copper_2} />
-            <img alt={partId} className={photo_copper_3 && type === "copperwires" ? "photo-img" : "hidden"} src={photo_copper_3} />
-            <img alt={partId} className={photo_coils_1 && type === "coils" ? "photo-img" : "hidden"} src={photo_coils_1} />
-            <img alt={partId} className={photo_coils_2 && type === "coils" ? "photo-img" : "hidden"} src={photo_coils_2} />
-            <img alt={partId} className={photo_coils_3 && type === "coils" ? "photo-img" : "hidden"} src={photo_coils_3} />
-            <img alt={partId} className={photo_RepairKit_1 && type === "repairkit" ? "photo-img" : "hidden"} src={photo_RepairKit_1} />
-            <img alt={partId} className={photo_bar_1 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_1} />
-            <img alt={partId} className={photo_bar_2 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_2} />
-            <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} src={photo_bar_3} />
+            <img alt={partId} className={photo_wires_1 && type === "wires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_wires_1} />
+            <img alt={partId} className={photo_wires_2 && type === "wires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_wires_2} />
+            <img alt={partId} className={photo_wires_3 && type === "wires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_wires_3} />
+            <img alt={partId} className={photo_copper_1 && type === "copperwires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_copper_1} />
+            <img alt={partId} className={photo_copper_2 && type === "copperwires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_copper_2} />
+            <img alt={partId} className={photo_copper_3 && type === "copperwires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_copper_3} />
+            <img alt={partId} className={photo_coils_1 && type === "coils" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_coils_1} />
+            <img alt={partId} className={photo_coils_2 && type === "coils" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_coils_2} />
+            <img alt={partId} className={photo_coils_3 && type === "coils" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_coils_3} />
+            <img alt={partId} className={photo_RepairKit_1 && type === "repairkit" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_RepairKit_1} />
+            <img alt={partId} className={photo_bar_1 && type === "bar" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_bar_1} />
+            <img alt={partId} className={photo_bar_2 && type === "bar" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_bar_2} />
+            <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_bar_3} />
           </div>
           <div className={hideCar ? "car-result-content" : "hidden"}>
             <p>
@@ -207,6 +225,12 @@ function Details() {
         <section className='details-results'>
           <SearchResults allCarsArray={cars} partId={partId} t={t} />
         </section>
+      </div>
+      <div className={hidePopup ? "popup hidden" : "popup"} onClick={showPopup}>
+        <button className='close-popup' onClick={showPopup}>
+          x
+        </button>
+        <img alt={partId} className='popup__img' src={photoURL} />
       </div>
     </>
   );

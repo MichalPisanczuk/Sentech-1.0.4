@@ -65,6 +65,31 @@ button.close-popup {
   right: 60px;
 }
 
+.popup__arrow {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 120px;
+  line-height: 120px;
+  opacity: 0.5;
+  position: absolute;
+  top: 50%;
+  transition: opacity 0.3s;
+  width: 120px;
+}
+
+.popup__arrow:hover {
+  opacity: 1;
+}
+
+.popup_arrow--left {
+  left: 10%;
+}
+
+.popup_arrow--right {
+  right: 10%;
+}
+
 @media screen and (max-width: 769px) {
   .car-result-content {
     padding: 20px 5px;

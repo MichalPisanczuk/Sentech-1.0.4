@@ -12,11 +12,14 @@ function Details() {
   let { type, partId, choicedMake, choicedModel, choicedEngine } = useParams();
 
   let hideCar = false;
-  const [hidePopup, setHidePopup] = useState(true);
 
   const [cars, setCar] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [hidePopup, setHidePopup] = useState(true);
+  const [photoURL, setPhotoURL] = useState(null);
+  const [currentImage, setCurrentImage] = useState();
 
   let make,
     model,
@@ -130,16 +133,38 @@ function Details() {
     hidePopup ? setHidePopup(false) : setHidePopup(true);
   };
 
-  const [photoURL, setPhotoURL] = useState(null);
-  const getPhotoURL = () => {
-    const thumbnails = document.querySelectorAll(".photo-img");
-    thumbnails.forEach((thumb) => {
-      thumb.addEventListener("click", (e) => {
-        setPhotoURL(e.target.src);
-      });
+  const thumbnails = document.querySelectorAll(".photo-img");
+
+  thumbnails.forEach((thumb, index) => {
+    thumb.addEventListener("click", (e) => {
+      setPhotoURL(e.target.src);
+      setCurrentImage(index);
     });
+  });
+
+  const nextIMG = () => {
+    console.log("Next");
     if (photoURL !== null) {
-      showPopup();
+      if (currentImage === thumbnails.length - 1) {
+        setCurrentImage(0);
+        setPhotoURL(thumbnails[currentImage].src);
+      } else {
+        setCurrentImage((currentImage) => currentImage + 1);
+        setPhotoURL(thumbnails[currentImage].src);
+      }
+    }
+  };
+
+  const previousIMG = () => {
+    console.log("Previous");
+    if (photoURL !== null) {
+      if (currentImage === 0) {
+        setCurrentImage((currentImage) => thumbnails.length - 1);
+        setPhotoURL(thumbnails[currentImage].src);
+      } else {
+        setCurrentImage((currentImage) => currentImage - 1);
+        setPhotoURL(thumbnails[currentImage].src);
+      }
     }
   };
 
@@ -157,19 +182,19 @@ function Details() {
         </div>
         <div className='result-content'>
           <div className='photo-result-content'>
-            <img alt={partId} className={photo_wires_1 && type === "wires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_wires_1} />
-            <img alt={partId} className={photo_wires_2 && type === "wires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_wires_2} />
-            <img alt={partId} className={photo_wires_3 && type === "wires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_wires_3} />
-            <img alt={partId} className={photo_copper_1 && type === "copperwires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_copper_1} />
-            <img alt={partId} className={photo_copper_2 && type === "copperwires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_copper_2} />
-            <img alt={partId} className={photo_copper_3 && type === "copperwires" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_copper_3} />
-            <img alt={partId} className={photo_coils_1 && type === "coils" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_coils_1} />
-            <img alt={partId} className={photo_coils_2 && type === "coils" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_coils_2} />
-            <img alt={partId} className={photo_coils_3 && type === "coils" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_coils_3} />
-            <img alt={partId} className={photo_RepairKit_1 && type === "repairkit" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_RepairKit_1} />
-            <img alt={partId} className={photo_bar_1 && type === "bar" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_bar_1} />
-            <img alt={partId} className={photo_bar_2 && type === "bar" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_bar_2} />
-            <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} onClick={getPhotoURL} src={photo_bar_3} />
+            <img alt={partId} className={photo_wires_1 && type === "wires" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_wires_1} />
+            <img alt={partId} className={photo_wires_2 && type === "wires" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_wires_2} />
+            <img alt={partId} className={photo_wires_3 && type === "wires" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_wires_3} />
+            <img alt={partId} className={photo_copper_1 && type === "copperwires" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_copper_1} />
+            <img alt={partId} className={photo_copper_2 && type === "copperwires" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_copper_2} />
+            <img alt={partId} className={photo_copper_3 && type === "copperwires" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_copper_3} />
+            <img alt={partId} className={photo_coils_1 && type === "coils" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_coils_1} />
+            <img alt={partId} className={photo_coils_2 && type === "coils" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_coils_2} />
+            <img alt={partId} className={photo_coils_3 && type === "coils" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_coils_3} />
+            <img alt={partId} className={photo_RepairKit_1 && type === "repairkit" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_RepairKit_1} />
+            <img alt={partId} className={photo_bar_1 && type === "bar" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_bar_1} />
+            <img alt={partId} className={photo_bar_2 && type === "bar" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_bar_2} />
+            <img alt={partId} className={photo_bar_3 && type === "bar" ? "photo-img" : "hidden"} onClick={showPopup} src={photo_bar_3} />
           </div>
           <div className={hideCar ? "car-result-content" : "hidden"}>
             <p>
@@ -226,11 +251,17 @@ function Details() {
           <SearchResults allCarsArray={cars} partId={partId} t={t} />
         </section>
       </div>
-      <div className={hidePopup ? "popup hidden" : "popup"} onClick={showPopup}>
+      <div className={hidePopup ? "popup hidden" : "popup"}>
         <button className='close-popup' onClick={showPopup}>
           x
         </button>
         <img alt={partId} className='popup__img' src={photoURL} />
+        <button className='popup__arrow popup_arrow--left' onClick={previousIMG}>
+          &#10094;
+        </button>
+        <button className='popup__arrow popup_arrow--right' onClick={nextIMG}>
+          &#10095;
+        </button>
       </div>
     </>
   );

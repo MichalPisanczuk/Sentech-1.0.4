@@ -142,8 +142,16 @@ function Details() {
     });
   });
 
+  const closePopup = function () {
+    const popup = document.querySelector(".popup");
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        setHidePopup(true);
+      }
+    });
+  };
+
   const nextIMG = () => {
-    console.log("Next");
     if (photoURL !== null) {
       if (currentImage === thumbnails.length - 1) {
         setCurrentImage(0);
@@ -156,7 +164,6 @@ function Details() {
   };
 
   const previousIMG = () => {
-    console.log("Previous");
     if (photoURL !== null) {
       if (currentImage === 0) {
         setCurrentImage((currentImage) => thumbnails.length - 1);
@@ -253,7 +260,7 @@ function Details() {
           <SearchResults allCarsArray={cars} partId={partId} t={t} />
         </section>
       </div>
-      <div className={hidePopup ? "popup hidden" : "popup"}>
+      <div className={hidePopup ? "popup hidden" : "popup"} onClick={closePopup}>
         <button className='close-popup' onClick={showPopup}>
           &#x2716;
         </button>

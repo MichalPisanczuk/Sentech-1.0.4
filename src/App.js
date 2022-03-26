@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SearchResults from "./components/SearchResults";
+import CrossSearchResult from "./components/CrossSearchResult";
 import axios from "axios";
 import "./App.css";
 
@@ -17,7 +18,7 @@ function App() {
   const [carModel, setCarModel] = useState("");
   const [carEngine, setCarEngine] = useState("");
   const [partId, setPartId] = useState("");
-  const [substitutePartId, setSubstitutePartId] = useState("");
+  const [crossPartId, setCrossPartId] = useState("");
 
   const [cars, setCar] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
@@ -73,6 +74,13 @@ function App() {
       return () => clearTimeout(timeOut);
     }
   }, [partId]);
+
+  useEffect(() => {
+    if (crossPartId.length > 2) {
+      const timeOut = setTimeout(() => setCrossPartId(crossPartId), 2000);
+      return () => clearTimeout(timeOut);
+    }
+  }, [crossPartId]);
 
   return (
     <>
@@ -153,12 +161,13 @@ function App() {
                   setCarEngine("");
                 }}
               />
-              <input disabled name='replacepartno' id='replacepartno' className='replacepartno' placeholder={t("Replace part number")} onChange={(e) => setSubstitutePartId(e.target.value)} />
+              <input name='replacepartno' id='replacepartno' className='replacepartno' placeholder={t("Replace part number")} onChange={(e) => setCrossPartId(e.target.value)} />
             </form>
           </div>
         </div>
         <section className='details-results'>
           <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId} t={t} />
+          <CrossSearchResult crossPartId={crossPartId} loading={loading} />
         </section>
       </div>
     </>

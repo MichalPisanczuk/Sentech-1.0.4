@@ -7,6 +7,7 @@ import "../components/SearchResults.css";
 const crossApiUrl = "https://api-sentech.herokuapp.com/crosses";
 
 let crossQueryExist = false;
+let productGroupURL = "";
 
 function CrossSearchResult(props) {
   const { t } = useTranslation();
@@ -40,13 +41,32 @@ function CrossSearchResult(props) {
       <h4>{crossQueryExist ? t("Search results") : ""}</h4>
       {crossQueryExist
         ? crossesArray.map((item, index) => {
-            console.log(props.crossPartId);
             if (JSON.stringify(item).includes(props.crossPartId)) {
+              switch (item.SENTECH.toString().substring(0, 1)) {
+                case "8":
+                  productGroupURL = "wires";
+                  break;
+                case "9":
+                  productGroupURL = "copperwires";
+                  break;
+                case "S":
+                  productGroupURL = "coils";
+                  break;
+                case "T":
+                  productGroupURL = "wires";
+                  break;
+                case "W":
+                  productGroupURL = "wires";
+                  break;
+                case "L":
+                  productGroupURL = "bar";
+                  break;
+              }
               return (
                 <div key={index}>
                   <span>
-                    <b> Sentech:</b>{" "}
-                    <Link to={`/details/wires/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>
+                    <b> Sentech:</b>
+                    <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>
                       {item.SENTECH ? <span className={item.SENTECH ? "result-link" : ""}>{item.SENTECH}</span> : "No data"}
                     </Link>
                   </span>

@@ -175,6 +175,16 @@ function Details() {
     }
   };
 
+  if (choicedMake.toString() === "undefined") {
+    choicedMake = t("Check your car below");
+  }
+  if (choicedModel.toString() === "undefined") {
+    choicedModel = t("Check your car below");
+  }
+  if (choicedEngine.toString() === "undefined") {
+    choicedEngine = t("Check your car below");
+  }
+
   return (
     <>
       <div className='content'>
@@ -216,10 +226,10 @@ function Details() {
               {t("Engine")}: {choicedEngine}
             </p>
             <p>
-              {t("Cylinders")}: {cylinders}
+              {t("Year")}: {year}
             </p>
             <p>
-              {t("Year")}: {year}
+              {t("Cylinders")}: {cylinders}
             </p>
             <p>
               {t("Power")}: {power}

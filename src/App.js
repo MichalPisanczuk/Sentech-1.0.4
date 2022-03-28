@@ -147,7 +147,7 @@ function App() {
             <div>
               <h4>{t("Find a product")}</h4>
             </div>
-            <form>
+            <div>
               <input
                 name='partno'
                 id='partno'
@@ -159,10 +159,21 @@ function App() {
                   setCarMake("");
                   setCarModel("");
                   setCarEngine("");
+                  setCrossPartId("");
                 }}
               />
-              <input name='replacepartno' id='replacepartno' className='replacepartno' placeholder={t("Replace part number")} onChange={(e) => setCrossPartId(e.target.value)} />
-            </form>
+              <input
+                name='replacepartno'
+                id='replacepartno'
+                className='replacepartno'
+                value={crossPartId}
+                placeholder={t("Replace part number")}
+                onChange={(e) => {
+                  setCrossPartId(e.target.value);
+                  setPartId("");
+                }}
+              />
+            </div>
           </div>
         </div>
         <section className='details-results'>

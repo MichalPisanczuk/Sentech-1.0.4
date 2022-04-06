@@ -89,11 +89,11 @@ function CrossSearchResult(props) {
                     <span className='result-link'>
                       <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.SENTECH}</Link>
                     </span>
-                    <div className='photo-thumbnail'>
+                    <span className='photo-thumbnail'>
                       <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>
                         <img src={photoURL} />
                       </Link>
-                    </div>
+                    </span>
                   </div>
                 );
               }

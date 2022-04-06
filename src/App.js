@@ -68,19 +68,19 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    if (partId.length > 2) {
-      const timeOut = setTimeout(() => setPartId(partId), 2000);
-      return () => clearTimeout(timeOut);
-    }
-  }, [partId]);
+  // useEffect(() => {
+  //   if (partId.length > 2) {
+  //     const timeOut = setTimeout(() => setPartId(partId), 2000);
+  //     return () => clearTimeout(timeOut);
+  //   }
+  // }, [partId]);
 
-  useEffect(() => {
-    if (crossPartId.length > 2) {
-      const timeOut = setTimeout(() => setCrossPartId(crossPartId), 2000);
-      return () => clearTimeout(timeOut);
-    }
-  }, [crossPartId]);
+  // useEffect(() => {
+  //   if (crossPartId.length > 2) {
+  //     const timeOut = setTimeout(() => setCrossPartId(crossPartId), 2000);
+  //     return () => clearTimeout(timeOut);
+  //   }
+  // }, [crossPartId]);
 
   return (
     <>
@@ -177,8 +177,8 @@ function App() {
           </div>
         </div>
         <section className='details-results'>
-          <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId} t={t} />
-          <CrossSearchResult crossPartId={crossPartId} loading={loading} partsArray={cars} />
+          {partId.length > 2 && <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId} t={t} />}
+          {crossPartId.length > 2 && <CrossSearchResult crossPartId={crossPartId} loading={loading} partsArray={cars} />}
         </section>
       </div>
     </>

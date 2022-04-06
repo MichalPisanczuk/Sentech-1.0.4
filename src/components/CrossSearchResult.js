@@ -84,17 +84,15 @@ function CrossSearchResult(props) {
                   }
                 });
                 return (
-                  <div key={index}>
-                    <div>
-                      Sentech:
-                      <span className='result-link'>
-                        <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.SENTECH}</Link>
-                      </span>
-                      <div className='photo-thumbnail'>
-                        <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>
-                          <img src={photoURL} />
-                        </Link>
-                      </div>
+                  <div key={index} className='grid-result'>
+                    Sentech:
+                    <span className='result-link'>
+                      <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.SENTECH}</Link>
+                    </span>
+                    <div className='photo-thumbnail'>
+                      <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>
+                        <img src={photoURL} />
+                      </Link>
                     </div>
                   </div>
                 );

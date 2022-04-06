@@ -103,6 +103,7 @@ function App() {
               onChange={(e) => {
                 setCarMake(e.target.value);
                 setPartId("");
+                setCrossPartId("");
               }}
             >
               <option value='undefined' key='undefined' id='makeSelect'>
@@ -171,6 +172,9 @@ function App() {
                 onChange={(e) => {
                   setCrossPartId(e.target.value);
                   setPartId("");
+                  setCarMake("");
+                  setCarModel("");
+                  setCarEngine("");
                 }}
               />
             </div>

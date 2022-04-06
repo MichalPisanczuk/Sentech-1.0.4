@@ -52,3 +52,9 @@
 .cross-result {
   margin: 15px 10px;
 }
+
+.photo-thumbnail img {
+  width: 200px;
+  height: auto;
+  margin: 20px;
+}

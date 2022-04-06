@@ -178,7 +178,7 @@ function App() {
         </div>
         <section className='details-results'>
           <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId} t={t} />
-          <CrossSearchResult crossPartId={crossPartId} loading={loading} />
+          <CrossSearchResult crossPartId={crossPartId} loading={loading} partsArray={cars} />
         </section>
       </div>
     </>

@@ -13,6 +13,7 @@ function CrossSearchResult(props) {
   const { t } = useTranslation();
   const [crossLoaded, setCrossLoaded] = useState(false);
   const [crossesArray, setCrossesArray] = useState([]);
+  let photoURL = "";
   let match = false;
 
   if (props.loading === false && crossLoaded === false) {
@@ -45,7 +46,7 @@ function CrossSearchResult(props) {
       {crossQueryExist
         ? crossesArray.map((item, index) => {
             // if (JSON.stringify(item).includes(props.crossPartId)) {
-            console.log(JSON.stringify(item).toLowerCase().trim());
+            // console.log(JSON.stringify(item).toLowerCase().trim());
             if (JSON.stringify(item).toLowerCase().replaceAll("-", "").replaceAll(" ", "").includes(props.crossPartId.toLowerCase().replaceAll("-", "").replaceAll(" ", ""))) {
               switch (item.SENTECH.toString().substring(0, 1)) {
                 case "8":
@@ -68,16 +69,36 @@ function CrossSearchResult(props) {
                   break;
               }
               match = true;
-              return (
-                <div key={index}>
-                  <div className='cross-result'>
-                    Sentech:
-                    <span className='result-link'>
-                      <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.SENTECH}</Link>
-                    </span>
+              if (match) {
+                props.partsArray.map((sentechPartId) => {
+                  if (item.SENTECH === sentechPartId.Przewody) {
+                    photoURL = sentechPartId.Photo_Przewody_1;
+                  } else if (item.SENTECH === sentechPartId.Przewody_miedziane) {
+                    photoURL = sentechPartId.Photo_Przewody_Miedziane_1;
+                  } else if (item.SENTECH === sentechPartId.Cewka) {
+                    photoURL = sentechPartId.Photo_Cewki_1;
+                  } else if (item.SENTECH === sentechPartId.Listwa) {
+                    photoURL = sentechPartId.Photo_Listwa_1;
+                  } else if (item.SENTECH === sentechPartId.Zestaw_naprawczy) {
+                    photoURL = sentechPartId.Photo_RepairKit_1;
+                  }
+                });
+                return (
+                  <div key={index}>
+                    <div>
+                      Sentech:
+                      <span className='result-link'>
+                        <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>{item.SENTECH}</Link>
+                      </span>
+                      <div className='photo-thumbnail'>
+                        <Link to={`/details/${productGroupURL}/${item.SENTECH}/${item.Marka}/${item.Typ_model}/${item.Pojemnosc_silnik}`}>
+                          <img src={photoURL} />
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              );
+                );
+              }
             } else {
             }
           })

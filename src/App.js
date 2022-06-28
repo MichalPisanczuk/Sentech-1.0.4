@@ -181,10 +181,10 @@ function App() {
           </div>
         </div>
         <section className='details-results'>
-          {(partId.length > 2 || carMake || carModel || carEngine) && (
-            <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId} t={t} />
+          {(partId.length > 1 || carMake || carModel || carEngine) && (
+            <SearchResults selectedCarMake={carMake} selectedCarModel={carModel} selectedCarEngine={carEngine} allCarsArray={cars} partId={partId.toUpperCase()} t={t} />
           )}
-          {crossPartId.length > 2 && <CrossSearchResult crossPartId={crossPartId} loading={loading} partsArray={cars} />}
+          {crossPartId.length > 1 && <CrossSearchResult crossPartId={crossPartId} loading={loading} partsArray={cars} />}
         </section>
       </div>
     </>
